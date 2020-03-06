@@ -30,3 +30,20 @@ addBtn.addEventListener('click', ev => {
 clearBtn.addEventListener('click', ev => {
   clearList();
 });
+window.addEventListener('beforeunload', ev => {
+  const items = [...listElement.childNodes];
+  if(items.length) {
+    const list = items.map(item => {
+      return item.textContent.slice(0, -1);
+    });
+    localStorage.setItem('shopping-list', list);
+  } else {
+    localStorage.removeItem('shopping-list');
+  }
+});
+window.addEventListener('DOMContentLoaded', ev => {
+  const shoppingList = localStorage.getItem('shopping-list');
+  if(shoppingList) {
+    renderList(shoppingList.split(','));
+  }
+});
