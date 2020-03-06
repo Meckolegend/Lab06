@@ -1,0 +1,17 @@
+body {
+  max-width: 500px;
+  margin: 1em;
+  background-color: silver;
+}
+ul {
+  padding: 0.5em 0;
+  margin: 0;
+  color: red;
+}
+li {
+  display: flex;
+  justify-content: space-between;
+}
+h1{
+  color:DarkGreen;
+}
