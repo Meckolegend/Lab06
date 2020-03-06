@@ -2,9 +2,8 @@ const listElement = document.getElementById('shopping');
 const newItem = document.getElementById('newItem');
 const addBtn = document.getElementById('addBtn');
 const clearBtn = document.getElementById('clearBtn');
-
 function addItem(item) {
-  const itemElement = document.createElement('li');v
+  const itemElement = document.createElement('li');
   itemElement.textContent = item;
   listElement.appendChild(itemElement);
 };
@@ -18,4 +17,9 @@ function renderList(list) {
 }
 addBtn.addEventListener('click', ev => {
   addItem(newItem.value);
+});
+addBtn.addEventListener('click', ev => {
+  if(newItem.value) { //<- this
+    addItem(newItem.value);
+  } //<- and this
 });
