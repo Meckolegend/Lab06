@@ -2,6 +2,7 @@ const listElement = document.getElementById('shopping');
 const newItem = document.getElementById('newItem');
 const addBtn = document.getElementById('addBtn');
 const clearBtn = document.getElementById('clearBtn');
+
 function addItem(item) {
   const itemElement = document.createElement('li');
   itemElement.textContent = item;
@@ -13,23 +14,30 @@ function addItem(item) {
  });
   listElement.appendChild(itemElement);
 };
+
 function clearList() {
   while(listElement.firstChild) {
     listElement.removeChild(listElement.firstChild);
   }
 }
+
 function renderList(list) {
   list.forEach(addItem);
 }
+
 addBtn.addEventListener('click', ev => {
-  if(newItem.value) {
-    addItem(newItem.value);
-    newItem.value = null;// Essentially makes it so that you can't spam click.
-  }
+  newItem.value.split(',').forEach(v => {
+    if(v) {
+      addItem(v);
+    }
+  });
+  newItem.value = null; // No Spamming Click
 });
+
 clearBtn.addEventListener('click', ev => {
   clearList();
 });
+
 window.addEventListener('beforeunload', ev => {
   const items = [...listElement.childNodes];
   if(items.length) {
@@ -41,9 +49,16 @@ window.addEventListener('beforeunload', ev => {
     localStorage.removeItem('shopping-list');
   }
 });
+
 window.addEventListener('DOMContentLoaded', ev => {
   const shoppingList = localStorage.getItem('shopping-list');
   if(shoppingList) {
     renderList(shoppingList.split(','));
+  }
+});
+
+newItem.addEventListener("keyup", ev => {
+  if (ev.key === "Enter") {
+    addBtn.click(); // No leaving the keyboard
   }
 });
