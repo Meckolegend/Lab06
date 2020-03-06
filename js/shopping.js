@@ -16,10 +16,8 @@ function renderList(list) {
   list.forEach(addItem);
 }
 addBtn.addEventListener('click', ev => {
-  addItem(newItem.value);
-});
-addBtn.addEventListener('click', ev => {
-  if(newItem.value) { //<- this
+  if(newItem.value) {
     addItem(newItem.value);
-  } //<- and this
+    newItem.value = null;// Essentially makes it so that you can't spam click.
+  }
 });
